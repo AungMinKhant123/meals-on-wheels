@@ -93,7 +93,7 @@
         </a>
     </div>
 
-    <div id="formContainer" class="mx-auto" style="max-width: 700px;">
+    <div id="formContainer" class="mx-auto" style="max-width: 650px;  display: {% if success %}none{% else %}flex{% endif %};">
         <div class="card registration-card">
             <div class="card-body p-4 p-md-5">
                 <div class="text-center mb-5">
@@ -104,7 +104,7 @@
                     <p class="text-muted">Register on behalf of someone you care for who needs assistance</p>
                 </div>
 
-                <form id="caregiverForm" method="POST" action="#" class="needs-validation"
+                <form id="caregiverForm" method="POST" action="{% url 'registration:caregiver_submit' %}" class="needs-validation"
                     novalidate>
                     {% csrf_token %}
 
@@ -169,9 +169,24 @@
                             <input type="text" name="member_id" class="form-control" required>
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">Gender *</label>
+                            <select name="gender" class="form-select" required>
+                                <option value="" selected disabled>Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label">Date of Birth *</label>
                             <input type="date" name="member_dob" class="form-control" required>
                         </div>
+
+                        <div class="col-md-6">
+                            <label class="form-label">Postal Code *</label>
+                            <input type="text" name="postal_code" class="form-control" placeholder="12345" required>
+                        </div>
+
                         <div class="col-12">
                             <label class="form-label">Health Conditions *</label>
                             <textarea name="member_health" class="form-control" rows="3"
@@ -198,7 +213,7 @@
         </div>
     </div>
 
-    <div id="successView" class="success-box mx-auto py-5" style="max-width: 500px;">
+    <div id="successView" class="success-box mx-auto py-5" style="max-width: 500px; display: {% if success %}block{% else %}none{% endif %};">
         <div class="card registration-card p-5">
             <div class="check-circle">
                 <i class="bi bi-check-lg fs-2"></i>

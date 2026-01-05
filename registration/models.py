@@ -63,3 +63,65 @@ class Partner(models.Model):
 
     def __str__(self):
         return self.org_name
+    
+
+class Member(models.Model):
+    GENDER_CHOICES = [
+        ("male", "Male"),
+        ("female", "Female"),
+        ("other", "Other"),
+    ]
+
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+
+    national_id = models.CharField(max_length=30, unique=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    dob = models.DateField()
+
+    email = models.EmailField(unique=True)
+    phone = models.CharField(max_length=20)
+
+    address = models.TextField()
+    postal_code = models.CharField(max_length=10)
+
+    health_conditions = models.TextField()
+    dietary_restrictions = models.TextField(blank=True, null=True)
+
+    is_active = models.BooleanField(default=False)  # approved by admin
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+    
+
+class Caregiver(models.Model):
+    GENDER_CHOICES = [
+        ("Male", "Male"),
+        ("Female", "Female"),
+        ("Other", "Other"),
+    ]
+
+    member = models.OneToOneField(
+        Member,
+        on_delete=models.CASCADE,
+        related_name="caregiver"
+    )
+
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+
+    national_id = models.CharField(max_length=30, unique=True)
+    gender = models.CharField(max_length=10, choices=GENDER_CHOICES)
+    dob = models.DateField()
+
+    relationship = models.CharField(max_length=50)
+
+    email = models.EmailField()
+    phone = models.CharField(max_length=20)
+    address = models.TextField()
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.first_name} ({self.relationship})"
