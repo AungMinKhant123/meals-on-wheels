@@ -6,4 +6,5 @@ app_name = 'core'
 urlpatterns = [
     path('', views.index, name='index'),
     path('donate/', views.donate, name='donate'),
+    path('donated/', views.donate_view, name='donated'),
 ]

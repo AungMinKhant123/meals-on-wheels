@@ -90,6 +90,18 @@
 {% endblock %}
 
 {% block content %}
+
+<div class="container mt-3">
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+</div>
+
 <div class="container py-5">
     <div class="mb-4">
         <a href="/" class="text-decoration-none text-muted fw-medium small">
@@ -99,7 +111,7 @@
 
     <div id="mainView" class="row g-5">
         <div class="col-lg-6">
-            <h1 class="display-5 fw-bold mb-4" >Your Gift Feeds Hope</h1>
+            <h1 class="display-5 fw-bold mb-4">Your Gift Feeds Hope</h1>
             <p class="lead text-muted mb-5">
                 Every dollar you donate helps us prepare and deliver nutritious meals to homebound adults in our
                 community.
@@ -135,7 +147,7 @@
                         <div class="icon-box mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
                             <i class="bi bi-heart-fill"></i>
                         </div>
-                        <h2 class="h4 fw-bold" >Make a Donation</h2>
+                        <h2 class="h4 fw-bold">Make a Donation</h2>
                     </div>
 
                     <div class="row g-3 mb-4">
@@ -156,7 +168,7 @@
                         </div>
                     </div>
 
-                    <form id="donationForm" method="POST" action="#">
+                    <form id="donationForm" method="POST" action="{% url 'core:donated' %}">
                         {% csrf_token %}
                         <input type="hidden" name="amount" id="formAmount" value="10">
                         <button type="button" id="donateBtn" class="btn btn-hero w-100 mb-3">
@@ -177,7 +189,7 @@
     <div id="successView" class="py-5">
         <div class="card card-donate mx-auto text-center p-5" style="max-width: 500px;">
             <div class="mb-4 text-success" style="font-size: 4rem;"><i class="bi bi-check-circle-fill"></i></div>
-            <h2 class="display-6 fw-bold mb-2" >Thank You!</h2>
+            <h2 class="display-6 fw-bold mb-2">Thank You!</h2>
             <p class="h3 fw-bold text-primary mb-4">$<span id="finalAmt">0</span> donated</p>
             <a href="/" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-2"></i>Return
                 Home</a>
@@ -218,7 +230,18 @@
     }
 
     donateBtn.addEventListener('click', () => {
+
         if (currentAmount <= 0) return alert("Please enter a valid amount");
+
+        // Show loading state
+        donateBtn.disabled = true;
+        document.getElementById('spinner').classList.remove('d-none');
+        donateBtn.querySelector('span').innerText = "Processing...";
+
+        // Just submit the form; Django will handle the "Success" state on reload
+        document.getElementById('donationForm').submit();
+
+        /*if (currentAmount <= 0) return alert("Please enter a valid amount");
 
         donateBtn.disabled = true;
         document.getElementById('spinner').classList.remove('d-none');
@@ -226,11 +249,12 @@
 
         // Simulate processing then show success
         setTimeout(() => {
+            document.getElementById('donationForm').submit();
             document.getElementById('mainView').style.display = 'none';
             document.getElementById('successView').style.display = 'block';
             document.getElementById('finalAmt').innerText = currentAmount;
             window.scrollTo(0, 0);
-        }, 1500);
+        }, 1500); */
     });
 </script>
 {% endblock %}
