@@ -16,16 +16,38 @@ def donate_view(request):
         amount = request.POST.get("amount")
 
         if not amount or float(amount) <= 0:
-            messages.error(request, "Invalid donation amount.")
-            return render(request, "core/donate.html")
+            return JsonResponse({
+                "success": False,
+                "message": "Invalid donation amount"
+            })
 
-        Donation.objects.create(
+        donation = Donation.objects.create(
             amount=amount,
-            status="completed"
+            status="completed"  # simulated success
         )
-        
-        # Add the success message
-        messages.success(request, f"Thank you! Your donation of ${amount} was successful.")
-        return redirect("core:donated") # Redirect to clear the POST data
+
+        return render(request, "core/donate.html", {
+            "success": True,
+            "donation": donation
+        })
 
     return render(request, "core/donate.html")
+
+# def donate_view(request):
+#     if request.method == "POST":
+#         amount = request.POST.get("amount")
+
+#         if not amount or float(amount) <= 0:
+#             messages.error(request, "Invalid donation amount.")
+#             return render(request, "core/donate.html")
+
+#         Donation.objects.create(
+#             amount=amount,
+#             status="completed"
+#         )
+        
+#         # Add the success message
+#         messages.success(request, f"Thank you! Your donation of ${amount} was successful.")
+#         return redirect("core:donated") # Redirect to clear the POST data
+
+#     return render(request, "core/donate.html")

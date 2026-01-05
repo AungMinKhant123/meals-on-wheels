@@ -81,7 +81,7 @@
         </a>
     </div>
 
-    <div id="formView" class="row justify-content-center">
+    <div id="formView" class="row justify-content-center" style="display: {% if success %}none{% else %}flex{% endif %};">
         <div class="col-lg-8 col-xl-7">
             <div class="card partner-card">
                 <div class="card-body p-4 p-md-5">
@@ -94,7 +94,7 @@
                         </p>
                     </div>
 
-                    <form id="partnerForm" method="POST" action="#" class="needs-validation" novalidate>
+                    <form id="partnerForm" method="POST" action="{% url 'registration:partner_submit' %}" class="needs-validation" novalidate>
                         {% csrf_token %}
 
                         <h5 class="fw-bold mb-3 pb-2 border-bottom">Organization Details</h5>
@@ -203,7 +203,7 @@
         </div>
     </div>
 
-    <div id="successMessage" class="text-center py-5">
+    <div id="successMessage" class="text-center py-5" style="display: {% if success %}block{% else %}none{% endif %};">
         <div class="card partner-card p-5 mx-auto" style="max-width: 500px;">
             <div class="icon-box bg-success text-white mb-4" style="width: 70px; height: 70px;">
                 <i class="bi bi-check-lg fs-2"></i>

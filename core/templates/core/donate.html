@@ -91,7 +91,7 @@
 
 {% block content %}
 
-<div class="container mt-3">
+{% comment %} <div class="container mt-3">
     {% if messages %}
     {% for message in messages %}
     <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -100,7 +100,7 @@
     </div>
     {% endfor %}
     {% endif %}
-</div>
+</div> {% endcomment %}
 
 <div class="container py-5">
     <div class="mb-4">
@@ -109,7 +109,7 @@
         </a>
     </div>
 
-    <div id="mainView" class="row g-5">
+    <div id="mainView" class="row g-5"  style="display: {% if success %}none{% else %}flex{% endif %};">
         <div class="col-lg-6">
             <h1 class="display-5 fw-bold mb-4">Your Gift Feeds Hope</h1>
             <p class="lead text-muted mb-5">
@@ -186,11 +186,11 @@
         </div>
     </div>
 
-    <div id="successView" class="py-5">
+    <div id="successView" class="py-5" style="display: {% if success %}block{% else %}none{% endif %};">
         <div class="card card-donate mx-auto text-center p-5" style="max-width: 500px;">
             <div class="mb-4 text-success" style="font-size: 4rem;"><i class="bi bi-check-circle-fill"></i></div>
             <h2 class="display-6 fw-bold mb-2">Thank You!</h2>
-            <p class="h3 fw-bold text-primary mb-4">$<span id="finalAmt">0</span> donated</p>
+            <p class="h3 fw-bold text-primary mb-4">$<span id="finalAmt">{{ donation.amount }}</span> donated</p>
             <a href="/" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-2"></i>Return
                 Home</a>
         </div>
@@ -231,17 +231,17 @@
 
     donateBtn.addEventListener('click', () => {
 
+        // if (currentAmount <= 0) return alert("Please enter a valid amount");
+
+        // // Show loading state
+        // donateBtn.disabled = true;
+        // document.getElementById('spinner').classList.remove('d-none');
+        // donateBtn.querySelector('span').innerText = "Processing...";
+
+        // // Just submit the form; Django will handle the "Success" state on reload
+        // document.getElementById('donationForm').submit();
+
         if (currentAmount <= 0) return alert("Please enter a valid amount");
-
-        // Show loading state
-        donateBtn.disabled = true;
-        document.getElementById('spinner').classList.remove('d-none');
-        donateBtn.querySelector('span').innerText = "Processing...";
-
-        // Just submit the form; Django will handle the "Success" state on reload
-        document.getElementById('donationForm').submit();
-
-        /*if (currentAmount <= 0) return alert("Please enter a valid amount");
 
         donateBtn.disabled = true;
         document.getElementById('spinner').classList.remove('d-none');
@@ -249,12 +249,12 @@
 
         // Simulate processing then show success
         setTimeout(() => {
-            document.getElementById('donationForm').submit();
             document.getElementById('mainView').style.display = 'none';
             document.getElementById('successView').style.display = 'block';
             document.getElementById('finalAmt').innerText = currentAmount;
+            document.getElementById('donationForm').submit();
             window.scrollTo(0, 0);
-        }, 1500); */
+        }, 1500);
     });
 </script>
 {% endblock %}

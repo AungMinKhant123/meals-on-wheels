@@ -8,4 +8,6 @@ urlpatterns = [
     path('caregiver/', views.caregiver_registration, name='caregiver'),
     path('partner/', views.partner_registration, name='partner'),
     path('volunteer/', views.volunteer_registration, name='volunteer'),
+    path('volunteer/submit/', views.volunteer_registration_view, name='volunteer_submit'),
+    path('partner/submit/', views.partner_registration_view, name='partner_submit'),
 ]

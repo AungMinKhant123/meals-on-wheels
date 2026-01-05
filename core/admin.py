@@ -6,4 +6,3 @@ from .models import Donation
 class DonationAdmin(admin.ModelAdmin):
     list_display = ("amount", "status", "created_at")
     list_filter = ("status", "created_at")
-    search_fields = ("donor_email",)

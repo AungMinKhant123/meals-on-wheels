@@ -86,7 +86,7 @@
         </a>
     </div>
 
-    <div id="registrationView" class="row justify-content-center">
+    <div id="registrationView" class="row justify-content-center" style="display: {% if success %}none{% else %}flex{% endif %};">
         <div class="col-lg-7">
             <div class="card volunteer-card">
                 <div class="card-body p-4 p-md-5">
@@ -99,7 +99,7 @@
                         <p class="text-muted small">Join our team of dedicated volunteers making a difference</p>
                     </div>
 
-                    <form id="volunteerForm" method="POST" action="#" class="needs-validation" novalidate>
+                    <form id="volunteerForm" method="POST" action="{% url 'registration:volunteer_submit' %}" class="needs-validation" novalidate>
                         {% csrf_token %}
 
                         <h2 class="section-title">Personal Information</h2>
@@ -215,7 +215,7 @@
         </div>
     </div>
 
-    <div id="successMessage" class="text-center py-5">
+    <div id="successMessage" class="text-center py-5" style="display: {% if success %}block{% else %}none{% endif %};">
         <div class="card volunteer-card p-5 mx-auto" style="max-width: 500px;">
             <div class="icon-header" style="width: 80px; height: 80px;">
                 <i class="bi bi-check-circle fs-1"></i>
