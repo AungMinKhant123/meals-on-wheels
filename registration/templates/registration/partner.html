@@ -1,0 +1,252 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Partner Registration - MerryMeal{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --bs-secondary: #f8f9fa;
+        --bs-secondary-foreground: #212529;
+        --primary-color: #ed8236;
+        --bs-primary-rgb: 237, 130, 54;
+        --bs-primary: #ed8236;
+    }
+
+    body {
+        background-color: #fcfcfc;
+        min-height: 100vh;
+    }
+
+    .partner-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .icon-box {
+        width: 56px;
+        height: 56px;
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        color: var(--bs-primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+    }
+
+    .service-option {
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 12px;
+        transition: all 0.2s ease;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .service-option:hover {
+        background-color: #f8f9fa;
+        border-color: #ed8236;
+    }
+
+    .btn-submit {
+        background-color: #ed8236;
+        color: white;
+        padding: 12px;
+        font-weight: 600;
+        border-radius: 8px;
+        border: none;
+    }
+
+    .btn-submit:hover {
+        background-color: #ed8236;
+        color: white;
+        transform: translateY(-1px);
+    }
+
+    #successMessage {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="mb-4">
+        <a href="/" class="text-decoration-none text-muted small fw-bold">
+            <i class="bi bi-arrow-left me-1"></i> Back to Home
+        </a>
+    </div>
+
+    <div id="formView" class="row justify-content-center">
+        <div class="col-lg-8 col-xl-7">
+            <div class="card partner-card">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-5">
+                        <div class="icon-box">
+                            <i class="bi bi-building fs-4"></i>
+                        </div>
+                        <h1 class="h3 fw-bold">Partner Registration</h1>
+                        <p class="text-muted">Join our network of food service providers helping to nourish communities
+                        </p>
+                    </div>
+
+                    <form id="partnerForm" method="POST" action="#" class="needs-validation" novalidate>
+                        {% csrf_token %}
+
+                        <h5 class="fw-bold mb-3 pb-2 border-bottom">Organization Details</h5>
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Organization Name *</label>
+                            <input type="text" name="org_name" class="form-control" placeholder="Your Company Name"
+                                required minlength="2">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Primary Contact Person *</label>
+                            <input type="text" name="contact_person" class="form-control" placeholder="John Doe"
+                                required>
+                        </div>
+
+                        <div class="row g-3 mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Email *</label>
+                                <input type="email" name="org_email" class="form-control"
+                                    placeholder="contact@company.com" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label fw-semibold small">Phone Number *</label>
+                                <input type="tel" name="org_phone" class="form-control" placeholder="+1 (555) 123-4567"
+                                    required minlength="10">
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label fw-semibold small">Full Address *</label>
+                            <textarea name="org_address" class="form-control" rows="2"
+                                placeholder="123 Business Street, City, State" required></textarea>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold small">Postal Code *</label>
+                            <input type="text" name="org_postal" class="form-control w-50" placeholder="12345" required>
+                        </div>
+
+                        <h5 class="fw-bold mb-3 pb-2 border-bottom">Services You Can Offer *</h5>
+                        <div class="row g-3 mb-4" id="servicesGrid">
+                            <div class="col-md-6">
+                                <label class="service-option">
+                                    <input type="checkbox" class="form-check-input me-2" name="services"
+                                        value="delivery">
+                                    <span class="small">Meal Delivery</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-option">
+                                    <input type="checkbox" class="form-check-input me-2" name="services"
+                                        value="preparation">
+                                    <span class="small">Meal Preparation</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-option">
+                                    <input type="checkbox" class="form-check-input me-2" name="services"
+                                        value="packaging">
+                                    <span class="small">Packaging</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-option">
+                                    <input type="checkbox" class="form-check-input me-2" name="services"
+                                        value="kitchen">
+                                    <span class="small">Kitchen Space</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-option">
+                                    <input type="checkbox" class="form-check-input me-2" name="services"
+                                        value="storage">
+                                    <span class="small">Cold Storage</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-option">
+                                    <input type="checkbox" class="form-check-input me-2" name="services"
+                                        value="ingredients">
+                                    <span class="small">Ingredient Supply</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-semibold small">Additional Information (Optional)</label>
+                            <textarea name="org_additional_info" class="form-control" rows="3"
+                                placeholder="Tell us more about your organization..."></textarea>
+                        </div>
+
+                        <div class="bg-light p-3 rounded mb-4">
+                            <p class="small text-muted mb-0">
+                                By submitting this form, you express interest in partnering with MerryMeal. Our team
+                                will review your application.
+                            </p>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-submit w-100 py-3 shadow-sm">
+                            <span id="btnText">Submit Partnership Request</span>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none ms-2"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successMessage" class="text-center py-5">
+        <div class="card partner-card p-5 mx-auto" style="max-width: 500px;">
+            <div class="icon-box bg-success text-white mb-4" style="width: 70px; height: 70px;">
+                <i class="bi bi-check-lg fs-2"></i>
+            </div>
+            <h2 class="fw-bold mb-3">Request Submitted!</h2>
+            <p class="text-muted mb-4">
+                Thank you for your interest. Our team will contact you within 5-7 business days.
+            </p>
+            <a href="/" class="btn btn-outline-dark px-4"><i class="bi bi-arrow-left me-2"></i>Return
+                Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const form = document.getElementById('partnerForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
+    const btnText = document.getElementById('btnText');
+    const checkboxes = document.querySelectorAll('input[name="services"]');
+
+    form.addEventListener('submit', function (event) {
+        // Basic multi-checkbox validation
+        const checkedCount = Array.from(checkboxes).filter(cb => cb.checked).length;
+
+        if (checkedCount === 0) {
+            event.preventDefault();
+            alert('Please select at least one service type.');
+            return;
+        }
+
+        if (form.checkValidity()) {
+            submitBtn.disabled = true;
+            btnText.textContent = "Submitting...";
+            spinner.classList.remove('d-none');
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+</script>
+{% endblock %}

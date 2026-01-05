@@ -1,0 +1,266 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Volunteer Registration - MerryMeal{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --sage-color: #ed8236;
+        --sage-light: rgba(237, 130, 54, 0.2);
+        --bg-gradient: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    }
+
+    body {
+        background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+        min-height: 100vh;
+    }
+
+    .volunteer-card {
+        border: none;
+        border-radius: 1.25rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    }
+
+    .icon-header {
+        width: 60px;
+        height: 60px;
+        background-color: var(--sage-light);
+        color: var(--sage-color);
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1rem;
+        font-weight: 600;
+        color: #444;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1.25rem;
+    }
+
+    .service-card {
+        border: 1px solid #dee2e6;
+        border-radius: 10px;
+        padding: 10px 15px;
+        transition: all 0.2s;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .service-card:hover {
+        background-color: #f8f9fa;
+    }
+
+    .btn-sage {
+        background-color: var(--sage-color);
+        color: white;
+        padding: 12px;
+        font-weight: 600;
+        border-radius: 10px;
+        border: none;
+    }
+
+    .btn-sage:hover {
+        background-color: #6e8673;
+        color: white;
+    }
+
+    #successMessage {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="mb-4">
+        <a href="/" class="text-decoration-none text-muted small fw-bold">
+            <i class="bi bi-arrow-left me-1"></i> Back to Home
+        </a>
+    </div>
+
+    <div id="registrationView" class="row justify-content-center">
+        <div class="col-lg-7">
+            <div class="card volunteer-card">
+                <div class="card-body p-4 p-md-5">
+
+                    <div class="text-center mb-5">
+                        <div class="icon-header">
+                            <i class="bi bi-heart-pulse fs-3"></i>
+                        </div>
+                        <h1 class="h3 fw-bold">Volunteer Registration</h1>
+                        <p class="text-muted small">Join our team of dedicated volunteers making a difference</p>
+                    </div>
+
+                    <form id="volunteerForm" method="POST" action="#" class="needs-validation" novalidate>
+                        {% csrf_token %}
+
+                        <h2 class="section-title">Personal Information</h2>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">First Name *</label>
+                                <input type="text" name="first_name" class="form-control" placeholder="John" required
+                                    minlength="2">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">Last Name *</label>
+                                <input type="text" name="last_name" class="form-control" placeholder="Doe" required
+                                    minlength="2">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-bold">Gender *</label>
+                                <select name="gender" class="form-select" required>
+                                    <option value="" selected disabled>Select gender</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <h2 class="section-title">Contact Information</h2>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">Email *</label>
+                                <input type="email" name="email" class="form-control" placeholder="john@example.com"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-bold">Phone Number *</label>
+                                <input type="tel" name="phone" class="form-control" placeholder="+1 (555) 000-0000"
+                                    required minlength="10">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-bold">Full Address *</label>
+                                <textarea name="address" class="form-control" rows="2"
+                                    placeholder="123 Main Street, City, State" required></textarea>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-bold">Postal Code *</label>
+                                <input type="text" name="postal_code" class="form-control" placeholder="12345" required>
+                            </div>
+                        </div>
+
+                        <h2 class="section-title">How Would You Like to Help? *</h2>
+                        <div class="row g-2 mb-4">
+                            <div class="col-md-6">
+                                <label class="service-card">
+                                    <input type="checkbox" name="interests" value="delivery" class="form-check-input">
+                                    <span class="small">Meal Delivery</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-card">
+                                    <input type="checkbox" name="interests" value="preparation"
+                                        class="form-check-input">
+                                    <span class="small">Meal Preparation</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-card">
+                                    <input type="checkbox" name="interests" value="packaging" class="form-check-input">
+                                    <span class="small">Packaging</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-card">
+                                    <input type="checkbox" name="interests" value="transportation"
+                                        class="form-check-input">
+                                    <span class="small">Driving / Transportation</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-card">
+                                    <input type="checkbox" name="interests" value="admin" class="form-check-input">
+                                    <span class="small">Administrative Support</span>
+                                </label>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="service-card">
+                                    <input type="checkbox" name="interests" value="fundraising"
+                                        class="form-check-input">
+                                    <span class="small">Fundraising Events</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label small fw-bold">Availability (Optional)</label>
+                            <textarea name="availability" class="form-control" rows="2"
+                                placeholder="e.g., Weekday mornings, Saturdays..."></textarea>
+                        </div>
+
+                        <div class="bg-light p-3 rounded mb-4 border-start border-4 border-sage"
+                            style="border-left-color: var(--sage-color) !important;">
+                            <p class="small text-muted mb-0">
+                                By joining, you agree to help MerryMeal nourish our community and confirm the
+                                information provided is accurate.
+                            </p>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-sage w-100 py-3 shadow-sm">
+                            <span id="btnText">Join as Volunteer</span>
+                            <span id="spinner" class="spinner-border spinner-border-sm d-none ms-2"></span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successMessage" class="text-center py-5">
+        <div class="card volunteer-card p-5 mx-auto" style="max-width: 500px;">
+            <div class="icon-header" style="width: 80px; height: 80px;">
+                <i class="bi bi-check-circle fs-1"></i>
+            </div>
+            <h2 class="fw-bold mb-3">Welcome to the Team!</h2>
+            <p class="text-muted mb-4">
+                Thank you for volunteering with MerryMeal. Our coordinator will reach out to you shortly with next
+                steps.
+            </p>
+            <a href="/" class="btn btn-outline-secondary px-4">
+                <i class="bi bi-house me-2"></i> Return Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const form = document.getElementById('volunteerForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const spinner = document.getElementById('spinner');
+    const btnText = document.getElementById('btnText');
+    const checkboxes = document.querySelectorAll('input[name="interests"]');
+
+    form.addEventListener('submit', function (event) {
+        // Multi-checkbox validation (ensure at least one)
+        const isAnyChecked = Array.from(checkboxes).some(cb => cb.checked);
+
+        if (!isAnyChecked) {
+            event.preventDefault();
+            alert("Please select at least one way you'd like to help.");
+            return;
+        }
+
+        if (form.checkValidity()) {
+            submitBtn.disabled = true;
+            btnText.textContent = "Submitting...";
+            spinner.classList.remove('d-none');
+        } else {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        form.classList.add('was-validated');
+    }, false);
+</script>
+{% endblock %}

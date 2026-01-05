@@ -1,0 +1,236 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Donate - MerryMeal{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --bs-primary: #ed8236;
+        --bs-primary-rgb: 230, 57, 70;
+    }
+
+    body {
+        background-color: #fcfcfc;
+        min-height: 100vh;
+    }
+
+    .impact-item {
+        background: white;
+        border: 1px solid #eee;
+        border-radius: 12px;
+        padding: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        transition: all 0.2s;
+    }
+
+    .icon-box {
+        width: 40px;
+        height: 40px;
+        background: rgba(var(--bs-primary-rgb), 0.1);
+        color: var(--bs-primary);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .donation-btn {
+        background: white;
+        border: 2px solid #eee;
+        border-radius: 12px;
+        padding: 1.25rem 0.5rem;
+        font-weight: 700;
+        font-size: 1.1rem;
+        transition: all 0.2s;
+        width: 100%;
+    }
+
+    .donation-btn.active {
+        border-color: var(--bs-primary);
+        background-color: rgba(var(--bs-primary-rgb), 0.05);
+        color: var(--bs-primary);
+    }
+
+    .donation-btn:hover:not(.active) {
+        border-color: rgba(var(--bs-primary-rgb), 0.5);
+    }
+
+    .card-donate {
+        border: none;
+        border-radius: 1.5rem;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    .btn-hero {
+        background-color: var(--bs-primary);
+        color: white;
+        padding: 1rem;
+        font-weight: 600;
+        border-radius: 12px;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+    }
+
+    .btn-hero:hover {
+        background-color: #ed8236;
+        color: white;
+    }
+
+    #successView {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="mb-4">
+        <a href="/" class="text-decoration-none text-muted fw-medium small">
+            <i class="bi bi-arrow-left me-1"></i> Back to Home
+        </a>
+    </div>
+
+    <div id="mainView" class="row g-5">
+        <div class="col-lg-6">
+            <h1 class="display-5 fw-bold mb-4" >Your Gift Feeds Hope</h1>
+            <p class="lead text-muted mb-5">
+                Every dollar you donate helps us prepare and deliver nutritious meals to homebound adults in our
+                community.
+            </p>
+
+            <h3 class="h5 fw-bold mb-4">Your Impact</h3>
+            <div class="row g-3">
+                <div class="col-12">
+                    <div class="impact-item">
+                        <div class="icon-box"><i class="bi bi-currency-dollar"></i></div>
+                        <div><span class="fw-bold">$10</span> — Provides 2 nutritious meals</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="impact-item">
+                        <div class="icon-box"><i class="bi bi-currency-dollar"></i></div>
+                        <div><span class="fw-bold">$25</span> — Feeds someone for a week</div>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="impact-item">
+                        <div class="icon-box"><i class="bi bi-currency-dollar"></i></div>
+                        <div><span class="fw-bold">$100</span> — Feeds 4 people for a week</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card card-donate">
+                <div class="card-body p-4 p-md-5">
+                    <div class="text-center mb-4">
+                        <div class="icon-box mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.5rem;">
+                            <i class="bi bi-heart-fill"></i>
+                        </div>
+                        <h2 class="h4 fw-bold" >Make a Donation</h2>
+                    </div>
+
+                    <div class="row g-3 mb-4">
+                        <div class="col-4"><button class="donation-btn active" data-amt="10">$10</button></div>
+                        <div class="col-4"><button class="donation-btn" data-amt="25">$25</button></div>
+                        <div class="col-4"><button class="donation-btn" data-amt="50">$50</button></div>
+                        <div class="col-4"><button class="donation-btn" data-amt="100">$100</button></div>
+                        <div class="col-4"><button class="donation-btn" data-amt="250">$250</button></div>
+                        <div class="col-4"><button class="donation-btn" data-amt="500">$500</button></div>
+                    </div>
+
+                    <div class="mb-4">
+                        <label class="form-label small fw-bold">Or enter a custom amount</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-white border-end-0 text-muted">$</span>
+                            <input type="number" id="customAmount" class="form-control border-start-0 ps-0"
+                                placeholder="Enter amount">
+                        </div>
+                    </div>
+
+                    <form id="donationForm" method="POST" action="#">
+                        {% csrf_token %}
+                        <input type="hidden" name="amount" id="formAmount" value="10">
+                        <button type="button" id="donateBtn" class="btn btn-hero w-100 mb-3">
+                            <i class="bi bi-heart-fill"></i>
+                            <span>Donate $<span id="displayAmt">10</span></span>
+                            <div id="spinner" class="spinner-border spinner-border-sm d-none"></div>
+                        </button>
+                    </form>
+
+                    <p class="text-center text-muted mb-0" style="font-size: 0.75rem;">
+                        MerryMeal is a 501(c)(3) nonprofit. Your donation is tax-deductible.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="successView" class="py-5">
+        <div class="card card-donate mx-auto text-center p-5" style="max-width: 500px;">
+            <div class="mb-4 text-success" style="font-size: 4rem;"><i class="bi bi-check-circle-fill"></i></div>
+            <h2 class="display-6 fw-bold mb-2" >Thank You!</h2>
+            <p class="h3 fw-bold text-primary mb-4">$<span id="finalAmt">0</span> donated</p>
+            <a href="/" class="btn btn-outline-secondary"><i class="bi bi-arrow-left me-2"></i>Return
+                Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    let currentAmount = 10;
+    const btns = document.querySelectorAll('.donation-btn');
+    const customInp = document.getElementById('customAmount');
+    const displayAmt = document.getElementById('displayAmt');
+    const formAmount = document.getElementById('formAmount');
+    const donateBtn = document.getElementById('donateBtn');
+
+    // Button Selection logic
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            customInp.value = '';
+            updateValues(btn.dataset.amt);
+        });
+    });
+
+    // Custom Input logic
+    customInp.addEventListener('input', (e) => {
+        btns.forEach(b => b.classList.remove('active'));
+        updateValues(e.target.value || 0);
+    });
+
+    function updateValues(val) {
+        currentAmount = val;
+        displayAmt.innerText = val;
+        formAmount.value = val; // Updates hidden input for Django POST
+    }
+
+    donateBtn.addEventListener('click', () => {
+        if (currentAmount <= 0) return alert("Please enter a valid amount");
+
+        donateBtn.disabled = true;
+        document.getElementById('spinner').classList.remove('d-none');
+        donateBtn.querySelector('span').innerText = "Processing...";
+
+        // Simulate processing then show success
+        setTimeout(() => {
+            document.getElementById('mainView').style.display = 'none';
+            document.getElementById('successView').style.display = 'block';
+            document.getElementById('finalAmt').innerText = currentAmount;
+            window.scrollTo(0, 0);
+        }, 1500);
+    });
+</script>
+{% endblock %}

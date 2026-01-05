@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Caregiver Registration - MerryMeal{% endblock %}
+
+{% block extra_css %}
+<style>
+    :root {
+        --bs-primary: #ed8236;
+        --bs-primary-rgb: 237, 130, 54;
+        --soft-bg: #fffcfb;
+    }
+
+    body {
+        background-color: var(--soft-bg);
+        min-height: 100vh;
+    }
+
+    .registration-card {
+        border: none;
+        border-radius: 1.5rem;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.07);
+    }
+
+    .icon-header {
+        width: 56px;
+        height: 56px;
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        color: var(--bs-primary);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1rem;
+    }
+
+    .section-divider {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #333;
+        padding-bottom: 0.75rem;
+        border-bottom: 2px solid #f0f0f0;
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        font-size: 0.85rem;
+        color: #555;
+        margin-bottom: 0.4rem;
+    }
+
+    .btn-hero {
+        background-color: var(--bs-primary);
+        color: white;
+        padding: 14px;
+        font-weight: 600;
+        border-radius: 10px;
+        border: none;
+        transition: all 0.3s;
+    }
+
+    .btn-hero:hover {
+        background-color: #ed8236;
+        transform: translateY(-2px);
+    }
+
+    .success-box {
+        display: none;
+        text-align: center;
+    }
+
+    .check-circle {
+        width: 70px;
+        height: 70px;
+        background-color: rgba(135, 163, 141, 0.2);
+        color: #5a7360;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 1.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="mx-auto mb-4" style="max-width: 700px;">
+        <a href="/" class="text-decoration-none text-muted small fw-bold">
+            <i class="bi bi-arrow-left me-1"></i> Back to Home
+        </a>
+    </div>
+
+    <div id="formContainer" class="mx-auto" style="max-width: 700px;">
+        <div class="card registration-card">
+            <div class="card-body p-4 p-md-5">
+                <div class="text-center mb-5">
+                    <div class="icon-header">
+                        <i class="bi bi-heart-fill fs-4"></i>
+                    </div>
+                    <h1 class="h3 fw-bold" >Caregiver Registration</h1>
+                    <p class="text-muted">Register on behalf of someone you care for who needs assistance</p>
+                </div>
+
+                <form id="caregiverForm" method="POST" action="#" class="needs-validation"
+                    novalidate>
+                    {% csrf_token %}
+
+                    <h2 class="section-divider mt-0">Your Information (Caregiver)</h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name *</label>
+                            <input type="text" name="caregiver_first_name" class="form-control" required minlength="2">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name *</label>
+                            <input type="text" name="caregiver_last_name" class="form-control" required minlength="2">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">National ID *</label>
+                            <input type="text" name="caregiver_id" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Gender *</label>
+                            <select name="caregiver_gender" class="form-select" required>
+                                <option value="" selected disabled>Select gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth *</label>
+                            <input type="date" name="caregiver_dob" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Relationship with Member *</label>
+                            <input type="text" name="relationship" class="form-control"
+                                placeholder="e.g. Daughter, Nurse" required>
+                        </div>
+                        <div class="col-md-8">
+                            <label class="form-label">Email *</label>
+                            <input type="email" name="caregiver_email" class="form-control" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Phone *</label>
+                            <input type="tel" name="caregiver_phone" class="form-control" required minlength="10">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Full Address *</label>
+                            <textarea name="caregiver_address" class="form-control" rows="2" required></textarea>
+                        </div>
+                    </div>
+
+                    <h2 class="section-divider">Member Information (Recipient)</h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">First Name *</label>
+                            <input type="text" name="member_first_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Last Name *</label>
+                            <input type="text" name="member_last_name" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">National ID *</label>
+                            <input type="text" name="member_id" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Date of Birth *</label>
+                            <input type="date" name="member_dob" class="form-control" required>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Health Conditions *</label>
+                            <textarea name="member_health" class="form-control" rows="3"
+                                placeholder="Describe health conditions..." required minlength="10"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Dietary Restrictions (Optional)</label>
+                            <textarea name="member_diet" class="form-control" rows="2"
+                                placeholder="Allergies, preferences, etc."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="bg-light rounded p-3 mt-4 small text-muted">
+                        By submitting, you confirm authorization to register on behalf of the member and that all
+                        information is accurate.
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="btn btn-hero w-100 mt-4 shadow-sm">
+                        <span id="btnText">Submit Application</span>
+                        <span id="btnSpinner" class="spinner-border spinner-border-sm d-none"></span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="successView" class="success-box mx-auto py-5" style="max-width: 500px;">
+        <div class="card registration-card p-5">
+            <div class="check-circle">
+                <i class="bi bi-check-lg fs-2"></i>
+            </div>
+            <h2 class="h3 fw-bold mb-2" >Application Submitted!</h2>
+            <p class="text-muted mb-4">
+                Thank you for registering. Our team will review the application and contact you within 2-3 business
+                days.
+            </p>
+            <a href="/" class="btn btn-outline-secondary px-4 py-2">
+                <i class="bi bi-arrow-left me-2"></i> Return Home
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    const form = document.getElementById('caregiverForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const btnText = document.getElementById('btnText');
+    const btnSpinner = document.getElementById('btnSpinner');
+
+    form.addEventListener('submit', function (event) {
+        if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
+        } else {
+            // Show loading state while Django processes the request
+            submitBtn.disabled = true;
+            btnText.textContent = "Submitting...";
+            btnSpinner.classList.remove('d-none');
+        }
+    });
+</script>
+{% endblock %}

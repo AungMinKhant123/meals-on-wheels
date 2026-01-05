@@ -1,0 +1,656 @@
+/* --- Variables & Reset --- */
+:root {
+    --primary-color: #ed8236;
+    --sage-color: #87a38d;
+    --primary-red: #ed8236;
+    --sage-green: #87a38d;
+    --dark-bg: #1a1a1a;
+    --light-bg: #f4f4f4;
+    --white: #ffffff;
+    --text-main: #333333;
+    --text-muted: rgba(255, 255, 255, 0.7);
+    --border-color: #dee2e6;
+    --bg-gradient: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%);
+    --bs-primary: #ed8236;
+    --bs-foreground: #1a1a1a;
+    --transition: all 0.3s ease;
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.1);
+    --bs-primary-rgb: 237, 130, 54;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Inter", Arial, sans-serif;
+    background-color: var(--light-bg);
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+header {
+    background-color: #757e974b;
+}
+
+/* --- Shared Components --- */
+.btn-hero {
+    background-color: var(--primary-color);
+    color: var(--white);
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-weight: 600;
+    display: inline-block;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.btn-hero:hover {
+    transform: translateY(-2px);
+    opacity: 0.9;
+    color: var(--white);
+}
+
+.badge-custom {
+    background-color: #f8f9fa;
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.icon-box {
+    width: 48px;
+    height: 48px;
+    background-color: #f0f4f1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--sage-color);
+}
+
+/* --- Hero Section --- */
+.hero-section {
+    background: var(--bg-gradient);
+    position: relative;
+    overflow: hidden;
+    padding: 80px 0;
+}
+
+.hero-image {
+    border-radius: 20px;
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.blur-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: 0;
+    opacity: 0.3;
+}
+
+.floating-card {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 20;
+}
+
+.stat-icon {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+}
+
+/* --- How It Works Section --- */
+.how-it-works {
+    background-color: #f8f9fa;
+    padding: 80px 0;
+}
+
+.step-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 1.25rem;
+    padding: 2rem 1.5rem;
+    position: relative;
+    transition: var(--transition);
+    height: 100%;
+    z-index: 2;
+}
+
+.step-card:hover {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+}
+
+.step-number {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 24px;
+    height: 24px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border-radius: 50%;
+    font-size: 0.8rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+}
+
+.icon-container {
+    width: 64px;
+    height: 64px;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+    transition: var(--transition);
+}
+
+/* Step Color Variants */
+.bg-step-1 {
+    background: rgba(230, 57, 70, 0.1);
+    color: #e63946;
+}
+
+.bg-step-2 {
+    background: #f0f4f1;
+    color: var(--sage-color);
+}
+
+.bg-step-3 {
+    background: #fff0ed;
+    color: var(--primary-color);
+}
+
+.bg-step-4 {
+    background: #e9ecef;
+    color: #495057;
+}
+
+/* --- Desktop Connector Lines --- */
+@media (min-width: 992px) {
+    .step-wrapper {
+        position: relative;
+    }
+
+    .step-wrapper:not(:last-child)::after {
+        content: '';
+        position: absolute;
+        top: 3rem;
+        left: 60%;
+        width: 80%;
+        height: 2px;
+        background-color: var(--border-color);
+        z-index: 1;
+    }
+}
+
+/* --- Footer --- */
+.footer-custom {
+    background-color: var(--dark-bg);
+    color: var(--white);
+    padding: 60px 0 20px;
+}
+
+.footer-brand-icon {
+    background-color: var(--primary-color);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+}
+
+.footer-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition);
+    font-size: 0.875rem;
+}
+
+.footer-link:hover {
+    color: var(--primary-color);
+}
+
+.social-btn {
+    width: 36px;
+    height: 36px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    transition: var(--transition);
+}
+
+.social-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.border-top-muted {
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+}
+
+.services-section {
+    padding: 80px 0;
+    background-color: #ffffff;
+}
+
+/* Base Service Card */
+.service-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem;
+    border: 1px solid #eee;
+    padding: 2.5rem;
+    height: 100%;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.service-card:hover {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.08);
+    transform: translateY(-5px);
+}
+
+/* Icon Styling */
+.service-icon-box {
+    width: 56px;
+    height: 56px;
+    border-radius: 0.75rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .service-icon-box {
+    transform: scale(1.1);
+}
+
+/* Gradients (Matching Tailwind bg-gradient-to-br) */
+.grad-primary {
+    background: linear-gradient(135deg, rgba(230, 57, 70, 0.05) 0%, rgba(230, 57, 70, 0.1) 100%);
+}
+
+.grad-sage {
+    background: linear-gradient(135deg, rgba(135, 163, 141, 0.05) 0%, rgba(135, 163, 141, 0.1) 100%);
+}
+
+.grad-secondary {
+    background: linear-gradient(135deg, #f8f9fa 0%, rgba(230, 57, 70, 0.05) 100%);
+}
+
+.grad-terracotta {
+    background: linear-gradient(135deg, #fff0ed 0%, rgba(230, 57, 70, 0.05) 100%);
+}
+
+/* Icon Backgrounds */
+.icon-bg-primary {
+    background-color: rgba(230, 57, 70, 0.1);
+    color: var(--primary-red);
+}
+
+.icon-bg-sage {
+    background-color: rgba(135, 163, 141, 0.2);
+    color: var(--sage-green);
+}
+
+.icon-bg-dark {
+    background-color: #333;
+    color: #fff;
+}
+
+/* Decorative Background Circle */
+.service-card::after {
+    content: '';
+    position: absolute;
+    bottom: -2rem;
+    right: -2rem;
+    width: 128px;
+    height: 128px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    z-index: -1;
+    transition: transform 0.5s ease;
+}
+
+.service-card:hover::after {
+    transform: scale(1.5);
+}
+
+.btn-outline-custom {
+    border: 1px solid #ced4da;
+    border-radius: 8px;
+    padding: 8px 20px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-outline-custom:hover {
+    background-color: #f8f9fa;
+    border-color: #adb5bd;
+}
+
+.btn-outline-custom i {
+    transition: transform 0.2s;
+}
+
+.btn-outline-custom:hover i {
+    transform: translateX(4px);
+}
+
+.testimonials-section {
+    padding: 80px 0;
+    background-color: #f8f9fa;
+    /* bg-card equivalent */
+}
+
+.testimonial-card {
+    background: #ffffff;
+    border: 1px solid #dee2e6;
+    border-radius: 1.25rem;
+    padding: 2.5rem 2rem 2rem 2rem;
+    position: relative;
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.testimonial-card:hover {
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.08);
+}
+
+/* Floating Quote Icon */
+.quote-icon {
+    position: absolute;
+    top: -16px;
+    left: 32px;
+    width: 32px;
+    height: 32px;
+    background-color: var(--bs-primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba(230, 57, 70, 0.3);
+}
+
+.avatar-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Middle card offset effect on desktop */
+@media (min-width: 768px) {
+    .offset-card {
+        margin-top: -1.5rem;
+    }
+}
+
+blockquote {
+    font-style: italic;
+    color: #495057;
+    line-height: 1.6;
+}
+
+.donate-section {
+    padding: 100px 0;
+    background-color: var(--bs-foreground);
+    color: #ffffff;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Background Blurs */
+.donate-blur {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(100px);
+    z-index: 0;
+    opacity: 0.15;
+}
+
+.badge-donate {
+    background-color: rgba(230, 57, 70, 0.2);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 50px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.impact-card {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    text-align: center;
+    transition: transform 0.3s ease;
+}
+
+.impact-card:hover {
+    transform: translateY(-5px);
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.impact-icon {
+    color: var(--bs-primary);
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.btn-donate {
+    background-color: var(--bs-primary);
+    color: white;
+    border: none;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s;
+}
+
+.btn-donate:hover {
+    background-color: #ed8236;
+    color: white;
+    box-shadow: 0 8px 20px rgba(230, 57, 70, 0.3);
+}
+
+/* Staggered Image Grid */
+.stagger-grid img {
+    width: 100%;
+    border-radius: 1.25rem;
+    object-fit: cover;
+}
+
+.pt-stagger {
+    margin-top: 3rem;
+}
+
+body {
+    background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+.registration-card {
+    border: none;
+    border-radius: 1.25rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.icon-header {
+    width: 56px;
+    height: 56px;
+    background-color: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.form-label {
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #4a4a4a;
+}
+
+.section-title {
+    font-size: 1rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 1.25rem;
+    margin-top: 2rem;
+}
+
+.btn-hero {
+    background-color: var(--bs-primary);
+    color: white;
+    padding: 12px;
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+.btn-hero:hover {
+    background-color: #ed8236;
+    color: white;
+    transform: translateY(-1px);
+}
+
+.success-container {
+    display: none;
+    /* Toggle this via JS */
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.check-circle {
+    width: 64px;
+    height: 64px;
+    background-color: rgba(135, 163, 141, 0.2);
+    color: #5a7360;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+body {
+    background-color: #fcfcfc;
+    min-height: 100vh;
+}
+
+.impact-item {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.2s;
+}
+
+.icon-box {
+    width: 40px;
+    height: 40px;
+    background: rgba(var(--bs-primary-rgb), 0.1);
+    color: var(--bs-primary);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.donation-btn {
+    background: white;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    padding: 1.25rem 0.5rem;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.donation-btn.active {
+    border-color: var(--bs-primary);
+    background-color: rgba(var(--bs-primary-rgb), 0.05);
+    color: var(--bs-primary);
+}
+
+.donation-btn:hover:not(.active) {
+    border-color: rgba(var(--bs-primary-rgb), 0.5);
+}
+
+.card-donate {
+    border: none;
+    border-radius: 1.5rem;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.btn-hero {
+    background-color: var(--bs-primary);
+    color: white;
+    padding: 1rem;
+    font-weight: 600;
+    border-radius: 12px;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-hero:hover {
+    background-color: #ed8236;
+    color: white;
+}
+
+#successView {
+    display: none;
+}
