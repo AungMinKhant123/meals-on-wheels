@@ -1,0 +1,230 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Google Font-->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+        rel="stylesheet">
+
+    <!--Bootstrap CSS-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!--Favorite Icon-->
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}" type="image/x-icon">
+    <style>
+        :root {
+            --bg-color: #f1e9e4;
+            --primary-color: #ed8236;
+            --secondary-color: #6c757d;
+            --text-color: #333333;
+            --border-radius: 15px;
+        }
+
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+        }
+
+        header {
+            background-color: #757e974b;
+        }
+
+        .card {
+            border-radius: var(--border-radius);
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease-in-out;
+        }
+
+        #pills-tab {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        #pills-tab .nav-link {
+            color: #555555;
+        }
+
+        #pills-tab .nav-link:hover {
+            color: #000000;
+        }
+
+        #pills-tab .nav-link.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .tab-pane {
+            padding: 10px;
+            background-color: white;
+            border: 1px solid #dddddd;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    <title>Admin Dashboard | Merry Meal</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg">
+            <div class="container">
+                <a class="navbar-brand" href="/">
+                    <img src="{% static 'img/logo.png' %}" alt="Meals on Wheels Logo" width="50" height="50" class="">
+                    Meals on Wheels
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a href="/" class="nav-link">Admin Dashboard</a>
+                        </li>
+                    </ul>
+                    <div class="ms-auto">
+                        <a href="{% url 'administration:admin_logout' %}" class="btn btn-outline-secondary">Log Out</a>
+                    </div>
+                </div>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container my-5">
+            <section>
+                <div class="row g-3">
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
+                            <i class="bi bi-bag-heart-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">3200+</h5>
+                            <small class="text-muted">Meals Delivered</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
+                            <i class="bi bi-people-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">1500+</h5>
+                            <small class="text-muted">Active Members</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
+                            <i class="bi bi-person-hearts" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">234</h5>
+                            <small class="text-muted">Volunteers</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
+                            <i class="bi bi-currency-dollar" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">$45,000</h5>
+                            <small class="text-muted">Funds Raised</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
+                            <i class="bi bi-calendar-check-fill"
+                                style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">120</h5>
+                            <small class="text-muted">Events Organized</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
+                            <i class="bi bi-chat-dots-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">500+</h5>
+                            <small class="text-muted">Feedbacks Received</small>
+                        </div>
+                    </div>
+            </section>
+        </div>
+        <div class="container my-5">
+            <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                <!-- <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-members-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-members" type="button" role="tab" aria-controls="pills-members"
+                        aria-selected="true">Members</button>
+                </li> -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="pills-deliveries-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-deliveries" type="button" role="tab" aria-controls="pills-deliveries"
+                        aria-selected="false">Deliveries</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-menu-tab" data-bs-toggle="pill" data-bs-target="#pills-menu"
+                        type="button" role="tab" aria-controls="pills-menu" aria-selected="false">Menu</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-inventory-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-inventory" type="button" role="tab" aria-controls="pills-inventory"
+                        aria-selected="false">Inventory</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="pills-tabContent">
+                <!-- <div class="tab-pane fade show active" id="pills-members" role="tabpanel"
+                    aria-labelledby="pills-members-tab" tabindex="0">
+                    Hello
+                </div> -->
+                <div class="tab-pane fade show active" id="pills-deliveries" role="tabpanel" aria-labelledby="pills-deliveries-tab"
+                    tabindex="0">
+                    <h3>Delivery Management</h3>
+                    <p>Assign and track meal deliveries</p>
+                    <table class="table-hover">
+
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab"
+                    tabindex="0">
+                    Hello
+                </div>
+                <div class="tab-pane fade" id="pills-inventory" role="tabpanel" aria-labelledby="pills-inventory-tab"
+                    tabindex="0">
+                    World
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <!--Bootstrap JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <!--Custom JS-->
+    <script src="{% static 'js/functions.js' %}"></script>
+
+    <script>
+    </script>
+</body>
+
+</html>

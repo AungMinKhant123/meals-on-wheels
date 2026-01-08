@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+
+{% block extra_css %}
+<style>
+    .login-card {
+        border: none;
+        border-radius: 1rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .icon-box {
+        width: 40px;
+        height: 40px;
+        background-color: #ed8236;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 10px;
+        margin-right: 10px;
+    }
+
+    .shield-box {
+        width: 56px;
+        height: 56px;
+        background-color: rgba(0, 0, 0, 0.05);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 12px;
+        margin: 0 auto 1rem;
+    }
+</style>
+{% endblock extra_css %}
+
+{% block title %}Admin Login | MerryMeal{% endblock title%}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="col-12 col-md-6 col-lg-4">
+            <div class="card login-card p-4">
+                <div class="card-body">
+                    <div class="d-flex align-items-center justify-content-center mb-4">
+                        <div class="icon-box">♥</div>
+                        <span class="h4 mb-0 fw-bold">MerryMeal</span>
+                    </div>
+
+                    <div class="shield-box">
+                        <span style="font-size: 1.5rem;"><i class="bi bi-shield-lock-fill" style="color: var(--primary-color);"></i></span>
+                    </div>
+
+                    <h2 class="text-center h4 fw-bold">Admin Login</h2>
+                    <p class="text-center text-muted small mb-4">Access the MerryMeal management dashboard</p>
+
+                    <form method="POST" action="{% url 'administration:admin_login_filled' %}" id="loginForm">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" name="username" class="form-control" id="username" placeholder="Admin Username"
+                                required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Password</label>
+                            <input type="password" name="password" class="form-control" id="password"
+                                placeholder="••••••••" required>
+                        </div>
+
+                        <button type="submit" id="submitBtn" class="btn btn-primary w-100 py-2 mt-2">
+                            Sign In
+                        </button>
+                    </form>
+
+                    {% comment %} <div class="mt-4 p-3 bg-light rounded border">
+                        <p class="fw-bold mb-1 small">Demo Credentials:</p>
+                        <p class="mb-0 small text-muted">Email: admin@merrymeal.org</p>
+                        <p class="mb-0 small text-muted">Password: admin123</p>
+                    </div> {% endcomment %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+{% block extra_js %}
+<script>
+    // Keep your existing JS logic or replace with Django-native form validation
+    const loginForm = document.getElementById('loginForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    loginForm.addEventListener('submit', async (e) => {
+        // Note: For a real Django app, you'd usually let the form submit normally 
+        // to your view unless using AJAX.
+        const password = document.getElementById('password').value;
+        if (password.length < 6) {
+            e.preventDefault();
+            alert("Password must be at least 6 characters");
+            return;
+        }
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Signing in...";
+    });
+</script>
+{% endblock extra_js %}
