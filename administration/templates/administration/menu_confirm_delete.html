@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Menu{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h3>Delete Menu</h3>
+    <div class="card p-4">
+        <p>Are you sure you want to delete the menu for <strong>{{ menu.date }}</strong>?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{% url 'administration:admin_dashboard' %}" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}

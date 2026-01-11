@@ -122,63 +122,92 @@
                     <div class="col-sm-6 col-md-3 col-lg-2">
                         <div class="card shadow-sm p-3">
                             <i class="bi bi-bag-heart-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
-                            <h5 class="mb-0 fw-bolder">3200+</h5>
+                            <h5 class="mb-0 fw-bolder">{{ meals_delivered_count }}</h5>
                             <small class="text-muted">Meals Delivered</small>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 col-lg-2">
                         <div class="card shadow-sm p-3">
                             <i class="bi bi-people-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
-                            <h5 class="mb-0 fw-bolder">1500+</h5>
+                            <h5 class="mb-0 fw-bolder">{{ active_members_count }}</h5>
                             <small class="text-muted">Active Members</small>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 col-lg-2">
                         <div class="card shadow-sm p-3">
+                            <i class="bi bi-person-heart"
+                                style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">{{ caregiver_count }}</h5>
+                            <small class="text-muted">Caregiver</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
+                            <i class="bi bi-building-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
+                            <h5 class="mb-0 fw-bolder">{{ partner_count }}</h5>
+                            <small class="text-muted">Partner</small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-md-3 col-lg-2">
+                        <div class="card shadow-sm p-3">
                             <i class="bi bi-person-hearts" style="font-size: 2rem; color: var(--primary-color);"></i>
-                            <h5 class="mb-0 fw-bolder">234</h5>
+                            <h5 class="mb-0 fw-bolder">{{ volunteers_count }}</h5>
                             <small class="text-muted">Volunteers</small>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-3 col-lg-2">
                         <div class="card shadow-sm p-3">
                             <i class="bi bi-currency-dollar" style="font-size: 2rem; color: var(--primary-color);"></i>
-                            <h5 class="mb-0 fw-bolder">$45,000</h5>
+                            <h5 class="mb-0 fw-bolder">${{ funds_raised }}</h5>
                             <small class="text-muted">Funds Raised</small>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-md-3 col-lg-2">
-                        <div class="card shadow-sm p-3">
-                            <i class="bi bi-calendar-check-fill"
-                                style="font-size: 2rem; color: var(--primary-color);"></i>
-                            <h5 class="mb-0 fw-bolder">120</h5>
-                            <small class="text-muted">Events Organized</small>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-md-3 col-lg-2">
-                        <div class="card shadow-sm p-3">
-                            <i class="bi bi-chat-dots-fill" style="font-size: 2rem; color: var(--primary-color);"></i>
-                            <h5 class="mb-0 fw-bolder">500+</h5>
-                            <small class="text-muted">Feedbacks Received</small>
-                        </div>
-                    </div>
+                    
             </section>
         </div>
         <div class="container my-5">
             <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-                <!-- <li class="nav-item" role="presentation">
+                <li class="nav-item" role="presentation">
                     <button class="nav-link active" id="pills-members-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-members" type="button" role="tab" aria-controls="pills-members"
                         aria-selected="true">Members</button>
-                </li> -->
+                </li>
                 <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="pills-deliveries-tab" data-bs-toggle="pill"
+                    <button class="nav-link" id="pills-deliveries-tab" data-bs-toggle="pill"
                         data-bs-target="#pills-deliveries" type="button" role="tab" aria-controls="pills-deliveries"
                         aria-selected="false">Deliveries</button>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-volunteers-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-volunteers" type="button" role="tab" aria-controls="pills-volunteers"
+                        aria-selected="false">Volunteers</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-caregivers-tab" data-bs-toggle="pill"
+                        data-bs-target="#pills-caregivers" type="button" role="tab" aria-controls="pills-caregivers"
+                        aria-selected="false">Caregivers</button>
+                </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-partners-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-partners" type="button" role="tab" aria-controls="pills-partners"
+                            aria-selected="false">Partners</button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="pills-donations-tab" data-bs-toggle="pill"
+                            data-bs-target="#pills-donations" type="button" role="tab" aria-controls="pills-donations"
+                            aria-selected="false">Donations</button>
+                    </li>
+                <!-- <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-menu-tab" data-bs-toggle="pill" data-bs-target="#pills-menu"
                         type="button" role="tab" aria-controls="pills-menu" aria-selected="false">Menu</button>
+                </li> -->
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-menuplanning-tab" data-bs-toggle="pill" data-bs-target="#pills-menuplanning"
+                        type="button" role="tab" aria-controls="pills-menuplanning" aria-selected="false">Menu Planning</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="pills-mealprep-tab" data-bs-toggle="pill" data-bs-target="#pills-mealprep"
+                        type="button" role="tab" aria-controls="pills-mealprep" aria-selected="false">Meal Preparation</button>
                 </li>
                 <li class="nav-item" role="presentation">
                     <button class="nav-link" id="pills-inventory-tab" data-bs-toggle="pill"
@@ -187,25 +216,359 @@
                 </li>
             </ul>
             <div class="tab-content" id="pills-tabContent">
-                <!-- <div class="tab-pane fade show active" id="pills-members" role="tabpanel"
+                <div class="tab-pane fade show active" id="pills-members" role="tabpanel"
                     aria-labelledby="pills-members-tab" tabindex="0">
-                    Hello
-                </div> -->
-                <div class="tab-pane fade show active" id="pills-deliveries" role="tabpanel" aria-labelledby="pills-deliveries-tab"
+                    <h3>Members</h3>
+                    <p>List of registered members</p>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>National ID</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Active</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for member in members %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ member.first_name }} {{ member.last_name }}</td>
+                                <td>{{ member.national_id }}</td>
+                                <td>{{ member.email }}</td>
+                                <td>{{ member.phone }}</td>
+                                <td>{% if member.is_active %}Yes{% else %}No{% endif %}</td>
+                                <td>{{ member.created_at|date:"Y-m-d H:i" }}</td>
+                                <td>
+                                    <a href="{% url 'administration:member_edit' member.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'administration:member_delete' member.pk %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
+                                    <a href="{% url 'administration:delivery_create_for_member' member.pk %}" class="btn btn-sm btn-outline-success ms-2">Assign</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="7" class="text-center">No members found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="pills-deliveries" role="tabpanel" aria-labelledby="pills-deliveries-tab"
                     tabindex="0">
-                    <h3>Delivery Management</h3>
-                    <p>Assign and track meal deliveries</p>
-                    <table class="table-hover">
-
+                    <h3>Deliveries</h3>
+                    <p>Assigned deliveries</p>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Member</th>
+                                <th>Volunteer</th>
+                                <th>Partner</th>
+                                <th>Delivery Date</th>
+                                <th>Status</th>
+                                <th>Assigned At</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for delivery in deliveries %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ delivery.member.first_name }} {{ delivery.member.last_name }}</td>
+                                <td>{% if delivery.volunteer %}{{ delivery.volunteer.first_name }} {{ delivery.volunteer.last_name }}{% else %}-{% endif %}</td>
+                                <td>{% if delivery.partner %}{{ delivery.partner.org_name }}{% else %}-{% endif %}</td>
+                                <td>{% if delivery.delivery_date %}{{ delivery.delivery_date }}{% else %}-{% endif %}</td>
+                                <td>{{ delivery.get_status_display }}</td>
+                                <td>{{ delivery.created_at|date:"Y-m-d H:i" }}</td>
+                                <td>
+                                    <a href="{% url 'administration:delivery_edit' delivery.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'administration:delivery_delete' delivery.pk %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center">No deliveries found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                    <div class="tab-pane fade" id="pills-partners" role="tabpanel" aria-labelledby="pills-partners-tab"
+                        tabindex="0">
+                        <h3>Partners</h3>
+                        <p>List of registered partners</p>
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Organization</th>
+                                    <th>Contact Person</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Services</th>
+                                    <th>Approved</th>
+                                    <th>Joined</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for partner in partners %}
+                                <tr>
+                                    <td>{{ forloop.counter }}</td>
+                                    <td>{{ partner.org_name }}</td>
+                                    <td>{{ partner.contact_person }}</td>
+                                    <td>{{ partner.org_email }}</td>
+                                    <td>{{ partner.org_phone }}</td>
+                                    <td>{{ partner.services }}</td>
+                                    <td>{% if partner.is_approved %}Yes{% else %}No{% endif %}</td>
+                                    <td>{{ partner.created_at|date:"Y-m-d H:i" }}</td>
+                                    <td>
+                                        <a href="{% url 'administration:partner_edit' partner.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                        <a href="{% url 'administration:partner_delete' partner.pk %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="9" class="text-center">No partners found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                <div class="tab-pane fade" id="pills-volunteers" role="tabpanel" aria-labelledby="pills-volunteers-tab"
+                    tabindex="0">
+                    <h3>Volunteers</h3>
+                    <p>List of registered volunteers</p>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Interests</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for volunteer in volunteers %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ volunteer.first_name }} {{ volunteer.last_name }}</td>
+                                <td>{{ volunteer.gender }}</td>
+                                <td>{{ volunteer.email }}</td>
+                                <td>{{ volunteer.phone }}</td>
+                                <td>{{ volunteer.interests }}</td>
+                                <td>{{ volunteer.created_at|date:"Y-m-d H:i" }}</td>
+                                <td>
+                                    <a href="{% url 'administration:volunteer_edit' volunteer.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'administration:volunteer_delete' volunteer.pk %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="8" class="text-center">No volunteers found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="pills-donations" role="tabpanel" aria-labelledby="pills-donations-tab"
+                    tabindex="0">
+                    <h3>Donations</h3>
+                    <p>Recent donations (read-only)</p>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for donation in donations %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>${{ donation.amount }}</td>
+                                <td>{{ donation.get_status_display }}</td>
+                                <td>{{ donation.created_at|date:"Y-m-d H:i" }}</td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">No donations found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="pills-caregivers" role="tabpanel" aria-labelledby="pills-caregivers-tab"
+                    tabindex="0">
+                    <h3>Caregivers</h3>
+                    <p>List of registered caregivers</p>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Member</th>
+                                <th>National ID</th>
+                                <th>Relationship</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Joined</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for caregiver in caregivers %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ caregiver.first_name }} {{ caregiver.last_name }}</td>
+                                <td>{{ caregiver.member.first_name }} {{ caregiver.member.last_name }}</td>
+                                <td>{{ caregiver.national_id }}</td>
+                                <td>{{ caregiver.relationship }}</td>
+                                <td>{{ caregiver.email }}</td>
+                                <td>{{ caregiver.phone }}</td>
+                                <td>{{ caregiver.created_at|date:"Y-m-d H:i" }}</td>
+                                <td>
+                                    <a href="{% url 'administration:caregiver_edit' caregiver.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'administration:caregiver_delete' caregiver.pk %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="9" class="text-center">No caregivers found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
                     </table>
                 </div>
                 <div class="tab-pane fade" id="pills-menu" role="tabpanel" aria-labelledby="pills-menu-tab"
                     tabindex="0">
-                    Hello
+
+                </div>
+                <div class="tab-pane fade" id="pills-menuplanning" role="tabpanel" aria-labelledby="pills-menuplanning-tab"
+                    tabindex="0">
+                    <h3>Menu Planning</h3>
+                    <div class="mb-3">
+                        <a href="{% url 'administration:menu_create' %}" class="btn btn-sm btn-primary">Create Menu</a>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Date</th>
+                                <th>Meals</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for menu in menus %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ menu.date }}</td>
+                                <td>
+                                    {% for m in menu.meals.all %}
+                                        <div>{{ m.name }}</div>
+                                    {% endfor %}
+                                </td>
+                                <td>{{ menu.notes }}</td>
+                                <td>
+                                    <a href="{% url 'administration:menu_edit' menu.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'administration:menu_delete' menu.pk %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="5" class="text-center">No menus found.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                <div class="tab-pane fade" id="pills-mealprep" role="tabpanel" aria-labelledby="pills-mealprep-tab"
+                    tabindex="0">
+                    <h3>Meal Preparation</h3>
+                    <div class="mb-3">
+                        <a href="{% url 'administration:meal_create' %}" class="btn btn-sm btn-primary">Create Meal</a>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Prep Time</th>
+                                <th>Ingredients</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for meal in meals %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ meal.name }}</td>
+                                <td>{% if meal.prep_time_minutes %}{{ meal.prep_time_minutes }} min{% else %}-{% endif %}</td>
+                                <td>{{ meal.ingredients|linebreaksbr }}</td>
+                                <td>
+                                    <a href="{% url 'administration:meal_edit' meal.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                                    <a href="{% url 'administration:meal_delete' meal.pk %}" class="btn btn-sm btn-outline-danger ms-2">Delete</a>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr><td colspan="5" class="text-center">No meals found.</td></tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
                 </div>
                 <div class="tab-pane fade" id="pills-inventory" role="tabpanel" aria-labelledby="pills-inventory-tab"
                     tabindex="0">
-                    World
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h5>Inventory</h5>
+                        <a href="{% url 'administration:ingredient_create' %}" class="btn btn-sm btn-primary">Add Ingredient</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Quantity</th>
+                                    <th>Expiry Date</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for ingredient in ingredients %}
+                                <tr>
+                                    <td>{{ ingredient.name }}</td>
+                                    <td>{{ ingredient.quantity }}</td>
+                                    <td>{{ ingredient.expiry_date|date:'Y-m-d' }}</td>
+                                    <td>
+                                        {% if ingredient.expiry_date and ingredient.expiry_date < today %}
+                                            <span class="badge bg-danger">Expired</span>
+                                        {% else %}
+                                            <span class="badge bg-success">OK</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        <a href="{% url 'administration:ingredient_edit' ingredient.pk %}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                        <a href="{% url 'administration:ingredient_delete' ingredient.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                                    </td>
+                                </tr>
+                                {% empty %}
+                                <tr>
+                                    <td colspan="5" class="text-center">No ingredients found.</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>

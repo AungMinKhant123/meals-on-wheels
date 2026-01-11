@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Delete Member{% endblock title %}
+
+{% block content %}
+<div class="container my-5">
+    <h3>Delete Member</h3>
+    <div class="card p-4">
+        <p>Are you sure you want to delete <strong>{{ member.first_name }} {{ member.last_name }}</strong> ({{ member.email }})?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger">Yes, delete</button>
+            <a href="{% url 'administration:admin_dashboard' %}" class="btn btn-secondary ms-2">Cancel</a>
+        </form>
+    </div>
+</div>
+{% endblock content %}
